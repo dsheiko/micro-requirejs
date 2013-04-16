@@ -2,12 +2,14 @@
     "name": "micro-requirejs",
     "title": "Micro RequireJS",
     "description": "Tiny asynchronous dependency loader, that does not require modification of dependent scripts",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "author": {
         "name": "Dmitry Sheiko",
         "url": "http://dsheiko.com"
     },
     "main": "./src/micro-rjs.js",
+    "dependencies": {
+    },
     "licenses": [
     	{
     		"type": "MIT",
