@@ -1,0 +1,30 @@
+{
+    "name": "micro-requirejs",
+    "title": "Micro RequireJS",
+    "description": "Tiny asynchronous dependency loader, that does not require modification of dependent scripts",
+    "version": "0.1.1",
+    "author": {
+        "name": "Dmitry Sheiko",
+        "url": "http://dsheiko.com"
+    },
+    "main": "./src/jquery.micro-rjs.js",
+    "licenses": [
+    	{
+    		"type": "MIT",
+    		"url": "http://github.com/fawek/codepainter/raw/master/LICENSE"
+    	}
+    ],
+    "maintainers": [
+    	{
+    		"name": "Dmitry Sheiko",
+    		"email": "me@dsheiko.com",
+    		"web": "http://dsheiko.com"
+    	}
+    ],
+    "repositories": [
+    	{
+            "type": "git",
+            "url": "https://github.com/dsheiko/micro-requirejs.git"
+    	}
+    ]
+}
