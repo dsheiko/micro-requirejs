@@ -52,3 +52,5 @@ rjs.require(['jQuery"], function(){
    var $ = window.jQuery;
 });
 ```
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/ae77280da53778436bd66b61549321b1 "githalytics.com")](http://githalytics.com/dsheiko/micro-requirejs)
