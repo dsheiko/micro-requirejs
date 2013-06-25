@@ -35,7 +35,7 @@ var module = module || {},
             }, false );
         },
        eventQueue = (function(){
-           return new function() {
+           var Constr = function() {
                 var queue = [];
                 return {
                     /**
@@ -66,8 +66,9 @@ var module = module || {},
                         }
                         return true;
                     }
-                }
+                };
             };
+            return new Constr();
        }());
 
        return (function(){

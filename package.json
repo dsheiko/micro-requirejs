@@ -8,8 +8,16 @@
         "url": "http://dsheiko.com"
     },
     "main": "./src/micro-rjs.js",
-    "dependencies": {
-    },
+    "devDependencies": {
+        "grunt": "~0.4.1",
+        "grunt-contrib-jshint": "~0.4.3",
+        "grunt-contrib-qunit": "~0.2.1",
+        "qunitjs": "1.x",
+        "jscodesniffer": ">= 1.1.2",
+        "grunt-jscs": ">= 0.1",
+        "uglify-js": ">= 2.0.0",
+        "grunt-contrib-uglify": ">=0.1"
+      },
     "licenses": [
     	{
     		"type": "MIT",
