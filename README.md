@@ -1,4 +1,7 @@
-# Micro RequireJS
+Micro RequireJS
+==============
+[![Build Status](https://travis-ci.org/dsheiko/micro-requirejs.png?branch=master)](https://travis-ci.org/dsheiko/micro-requirejs)
+[![NPM version](https://badge.fury.io/js/micro-requirejs.png)](http://badge.fury.io/js/micro-requirejs)
 
 A substantial web application doesn't need to wait until all the required
 JavaScript libraries loaded. Usually most of them can load asynchronously
