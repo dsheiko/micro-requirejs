@@ -2,7 +2,7 @@
     "name": "micro-requirejs",
     "title": "Micro RequireJS",
     "description": "Tiny asynchronous dependency loader, that does not require modification of dependent scripts",
-    "version": "0.1.2",
+    "version": "0.2.0",
     "author": {
         "name": "Dmitry Sheiko",
         "url": "http://dsheiko.com"
@@ -16,7 +16,8 @@
         "jscodesniffer": ">= 1.1.2",
         "grunt-jscs": ">= 0.1",
         "uglify-js": ">= 2.0.0",
-        "grunt-contrib-uglify": ">=0.1"
+        "grunt-contrib-uglify": ">=0.0.1",
+        "grunt-contrib-concat": ">0.0.1"
     },
     "scripts": {
         "test": "grunt test"

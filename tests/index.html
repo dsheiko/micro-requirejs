@@ -2,20 +2,82 @@
 <html>
 <head>
 	<meta charset="UTF-8" />
-	<title>QUnit Test Suite</title>
-	<link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-git.css" type="text/css" media="screen">
+	<title>Micro-RequireJs Test Suite</title>
+	<link rel="stylesheet" href="../node_modules/qunitjs/qunit/qunit.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+  <script src="../node_modules/qunitjs/qunit/qunit.js"></script>
+  <script type="text/javascript" src="../src/micro-rjs.js"></script>
 </head>
 <body>
-	<h1 id="qunit-header">Micro-RequireJs jQuery Plugin Test Suite</h1>
+	<h1 id="qunit-header">Micro-RequireJs Test Suite</h1>
 	<h2 id="qunit-banner"></h2>
 	<div id="qunit-testrunner-toolbar"></div>
 	<h2 id="qunit-userAgent"></h2>
 	<ol id="qunit-tests"></ol>
 	<div id="qunit-fixture">test markup</div>
-        <div id="sandbox"></div>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-        <script type="text/javascript" src="http://code.jquery.com/qunit/qunit-git.js"></script>
-        <script type="text/javascript" src="../src/micro-rjs.js"></script>
-	<script type="text/javascript" src="./js/test.js"></script>
+  <div id="sandbox"></div>
+
+<script type="text/javascript">
+(function( global ){
+  global._logger = [];
+
+  QUnit.asyncTest( "Define callback is called when the supplied script loaded", 1, function( assert ){
+    rjs.define("./stubs/dep1.js", "dependencyA", function(){
+      assert.ok( global._logger.indexOf("dep1") !== -1 );
+      QUnit.start();
+    });
+  });
+
+  QUnit.asyncTest( "Module requirements may include DOM-is-ready", 1, function( assert ){
+    rjs.define("./stubs/dep2.js", "dependencyB");
+    rjs.require([ "DOMContentLoaded", "dependencyB-loaded" ], function(){
+      assert.ok( global._logger.indexOf("dep2") !== -1 );
+      QUnit.start();
+    });
+  });
+
+
+  QUnit.asyncTest( "Require callback is fired up when all the supplied dependencies already loaded", 2, function( assert ){
+    global._logger = [];
+    rjs.reset();
+    rjs.define("./stubs/dep1.js", "dependencyA");
+    rjs.define("./stubs/dep2.js", "dependencyB");
+    rjs.require([ "dependencyA-loaded", "dependencyB-loaded" ], function(){
+      console.log(global._logger);
+      assert.ok( global._logger.indexOf("dep1") !== -1 );
+      assert.ok( global._logger.indexOf("dep2") !== -1 );
+      QUnit.start();
+    });
+  });
+
+  QUnit.asyncTest( "Require method can be called prior to dependencies defined", 2, function( assert ){
+    global._logger = [];
+    rjs.reset();
+    rjs.require([ "dependencyA-loaded", "dependencyB-loaded" ], function(){
+      console.log(global._logger);
+      assert.ok( global._logger.indexOf("dep1") !== -1 );
+      assert.ok( global._logger.indexOf("dep2") !== -1 );
+      QUnit.start();
+    });
+    rjs.define("./stubs/dep1.js", "dependencyA");
+    rjs.define("./stubs/dep2.js", "dependencyB");
+  });
+
+  QUnit.asyncTest( "Require method can be called while dependencies are being defined", 2, function( assert ){
+    global._logger = [];
+    rjs.reset();
+    rjs.define("./stubs/dep1.js", "dependencyA");
+    rjs.require([ "dependencyA-loaded", "dependencyB-loaded" ], function(){
+      console.log(global._logger);
+      assert.ok( global._logger.indexOf("dep1") !== -1 );
+      assert.ok( global._logger.indexOf("dep2") !== -1 );
+      QUnit.start();
+    });
+    rjs.define("./stubs/dep2.js", "dependencyB");
+  });
+
+}( this ));
+
+</script>
 </body>
 </html>

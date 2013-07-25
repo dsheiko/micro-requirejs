@@ -1,11 +1,11 @@
 /*jshint node:true */
-module.exports = function(grunt) {
+module.exports = function( grunt ) {
 
   grunt.loadNpmTasks("grunt-contrib-jshint");
   grunt.loadNpmTasks("grunt-jscs");
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks("grunt-contrib-qunit");
-  
+  grunt.loadNpmTasks("grunt-contrib-concat");
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -21,6 +21,12 @@ module.exports = function(grunt) {
         },
         all: ["./src"]
     },
+    concat: {
+      dist: {
+        src: ['./src/**/*.js'],
+        dest: './build/micro-rjs-ie6.js'
+      }
+    },
     qunit: {
       all: ["tests/index.html"]
     },
@@ -31,13 +37,13 @@ module.exports = function(grunt) {
       my_target: {
         files: {
           './build/micro-rjs.min.js' : ['./src/micro-rjs.js'],
-          './build/jquery.micro-rjs.min.js' : ['./src/jquery.micro-rjs.js']
+          './build/micro-rjs-ie6.min.js' : ['./build/micro-rjs-ie6.js']
         }
       }
     }
   });
 
   grunt.registerTask("test", ["jshint", "jscs", "qunit"]);
-  grunt.registerTask("default", ["test", "uglify"]);
+  grunt.registerTask("default", ["test", "concat", "uglify"]);
 
 };
