@@ -61,4 +61,5 @@ rjs.require(['jQuery"], function(){
 * micro-rjs.min.js - minified version with support Firefox >= 4, IE >=9, any Chrome and Opera >= 11.60
 * micro-rjs-ie6.js - shimed version with support for legacy browsers
 * micro-rjs-ie6.min.js
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/ae77280da53778436bd66b61549321b1 "githalytics.com")](http://githalytics.com/dsheiko/micro-requirejs)
+
+[![Analytics](https://ga-beacon.appspot.com/UA-1150677-13/dsheiko/micro-requirejs)](http://githalytics.com/dsheiko/micro-requirejs)
