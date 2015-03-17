@@ -1,3 +1,3 @@
 (function( global ){
-  global._logger.push("dep1");
+  global._logger.push( "dep1" );
 }( this ));

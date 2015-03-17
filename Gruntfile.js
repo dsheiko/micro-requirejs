@@ -1,49 +1,60 @@
 /*jshint node:true */
 module.exports = function( grunt ) {
 
-  grunt.loadNpmTasks("grunt-contrib-jshint");
-  grunt.loadNpmTasks("grunt-jscs");
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks("grunt-contrib-qunit");
-  grunt.loadNpmTasks("grunt-contrib-concat");
+  grunt.loadNpmTasks( "grunt-contrib-jshint" );
+  grunt.loadNpmTasks( "grunt-jscodesniffer" );
+  grunt.loadNpmTasks( "grunt-contrib-uglify" );
+  grunt.loadNpmTasks( "grunt-contrib-qunit" );
+  grunt.loadNpmTasks( "grunt-mocha-test" );
 
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
+    pkg: grunt.file.readJSON( "package.json" ),
     jshint: {
       options: {
         jshintrc: ".jshintrc"
       },
-      all: ["./src/**/*.js", "./tests/**/*.js"]
+      all: [ "./rjs.js", "./tests/**/*.js" ]
     },
     jscs: {
+			app: {
+				options: {
+					standard: "Jquery"
+				},
+				files: {
+					src: [ "./rjs.js", "./tests/tests.js" ]
+				}
+			},
+      test: {
+				options: {
+					standard: "Jquery",
+          reportFull: true
+				},
+				files: {
+					src: [ "./rjs.js", "./tests/tests.js" ]
+				}
+			}
+    },
+    mochaTest: {
+      test: {
         options: {
-            "standard": "Jquery"
+          quiet: false
         },
-        all: ["./src"]
-    },
-    concat: {
-      dist: {
-        src: ['./src/**/*.js'],
-        dest: './build/micro-rjs-ie6.js'
+        src: [ "./tests/tests.js" ]
       }
-    },
-    qunit: {
-      all: ["tests/index.html"]
     },
     uglify: {
       options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+        banner: "/*! <%= pkg.name %> <%= grunt.template.today(\"yyyy-mm-dd\") %> */\n"
       },
-      my_target: {
+      app: {
         files: {
-          './build/micro-rjs.min.js' : ['./src/micro-rjs.js'],
-          './build/micro-rjs-ie6.min.js' : ['./build/micro-rjs-ie6.js']
+          "./rjs.min.js" : ["./rjs.js"]
         }
       }
     }
   });
 
-  grunt.registerTask("test", ["jshint", "jscs", "qunit"]);
-  grunt.registerTask("default", ["test", "concat", "uglify"]);
+  grunt.registerTask( "test", [ "jshint", "jscs", "mochaTest" ] );
+  grunt.registerTask( "default", [ "test", "uglify" ] );
 
 };

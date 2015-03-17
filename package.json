@@ -1,43 +1,48 @@
 {
-    "name": "micro-requirejs",
-    "title": "Micro RequireJS",
-    "description": "Tiny asynchronous dependency loader, that does not require modification of dependent scripts",
-    "version": "0.2.0",
-    "author": {
-        "name": "Dmitry Sheiko",
-        "url": "http://dsheiko.com"
-    },
-    "main": "./src/micro-rjs.js",
-    "devDependencies": {
-        "grunt": "~0.4.1",
-        "grunt-contrib-jshint": "~0.4.3",
-        "grunt-contrib-qunit": "~0.2.1",
-        "qunitjs": "1.x",
-        "grunt-jscodesniffer": "*",
-        "uglify-js": ">= 2.0.0",
-        "grunt-contrib-uglify": ">=0.0.1",
-        "grunt-contrib-concat": ">0.0.1"
-    },
-    "scripts": {
-        "test": "grunt test"
-    },
-    "licenses": [
+  "name": "micro-requirejs",
+  "title": "Micro RequireJS",
+  "description": "Tiny asynchronous dependency loader, that does not require modification of dependent scripts",
+  "version": "1.0.0",
+  "keywords": [
+    "dependency",
+    "loader",
+    "AMD",
+    "micro"
+  ],
+  "author": {
+    "name": "Dmitry Sheiko",
+    "url": "http://dsheiko.com"
+  },
+  "main": "./rjs.js",
+  "devDependencies": {
+    "atomus": "^0.1.14",
+    "chai": "^2.1.2",
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.4.3",
+    "grunt-contrib-qunit": "~0.2.1",
+    "grunt-contrib-uglify": "^0.8.0",
+    "grunt-jscodesniffer": "^0.1.10",
+    "grunt-mocha-test": "^0.12.7",
+    "mocha": "^2.2.1"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "licenses": [
     {
-        "type": "MIT",
-        "url": "http://github.com/fawek/codepainter/raw/master/LICENSE"
+      "type": "MIT",
+      "url": "http://github.com/fawek/codepainter/raw/master/LICENSE"
     }
-    ],
-    "maintainers": [
+  ],
+  "maintainers": [
     {
-        "name": "Dmitry Sheiko",
-        "email": "me@dsheiko.com",
-        "web": "http://dsheiko.com"
+      "name": "Dmitry Sheiko",
+      "email": "me@dsheiko.com",
+      "web": "http://dsheiko.com"
     }
-    ],
-    "repositories": [
-    {
-        "type": "git",
-        "url": "https://github.com/dsheiko/micro-requirejs.git"
-    }
-    ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dsheiko/micro-requirejs.git"
+  }
 }
