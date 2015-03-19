@@ -78,12 +78,5 @@ describe( "Rjs", function(){
     }, this );
   });
 
-//    rjs.define("./stubs/dep2.js", "dependencyB");
-//    rjs.require([ "dependencyA-loaded", "dependencyB-loaded" ], function(){
-//      console.log(global._logger);
-//      assert.ok( global._logger.indexOf("dep1") !== -1 );
-//      assert.ok( global._logger.indexOf("dep2") !== -1 );
-//      QUnit.start();
-//    });
 
 });

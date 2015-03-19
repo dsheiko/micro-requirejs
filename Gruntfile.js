@@ -54,7 +54,7 @@ module.exports = function( grunt ) {
     }
   });
 
-  grunt.registerTask( "test", [ "jshint", "jscs", "mochaTest" ] );
+  grunt.registerTask( "test", [ "jshint", "jscs", "mochaTest", "uglify" ] );
   grunt.registerTask( "default", [ "test", "uglify" ] );
 
 };
