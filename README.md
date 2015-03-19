@@ -5,7 +5,7 @@ Micro RequireJS
 
 [![Build Status](https://travis-ci.org/dsheiko/micro-requirejs.png?branch=master)](https://travis-ci.org/dsheiko/micro-requirejs)
 [![Bower version](https://badge.fury.io/bo/micro-requirejs.svg)](http://badge.fury.io/bo/micro-requirejs)
-[![Analytics](https://ga-beacon.appspot.com/UA-1150677-13/dsheiko/micro-requirejs)](http://githalytics.com/dsheiko/micro-requirejs)
+
 
 A substantial web application doesn't need to wait until all the required
 JavaScript libraries loaded. Usually most of them can load asynchronously
@@ -64,3 +64,4 @@ You can run tests like that:
 grunt mochaTest
 ```
 
+[![Analytics](https://ga-beacon.appspot.com/UA-1150677-13/dsheiko/micro-requirejs)](http://githalytics.com/dsheiko/micro-requirejs)
