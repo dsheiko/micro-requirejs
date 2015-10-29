@@ -14,8 +14,12 @@
 		"__dirname": false,
 		"console": true,
 		"process": true,
+    "document": true,
     "before": false,
-    "it": false
+    "it": false,
+    "rjs": true,
+    "expect": true,
+    "_spy": true
   },
   "boss": true,
   "curly": true,

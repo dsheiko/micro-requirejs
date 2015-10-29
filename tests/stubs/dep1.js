@@ -1,3 +1,2 @@
-(function( global ){
-  global._logger.push( "dep1" );
-}( this ));
+_spy.push( "dep1" );
+

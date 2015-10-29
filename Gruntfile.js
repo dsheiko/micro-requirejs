@@ -4,8 +4,7 @@ module.exports = function( grunt ) {
   grunt.loadNpmTasks( "grunt-contrib-jshint" );
   grunt.loadNpmTasks( "grunt-jscodesniffer" );
   grunt.loadNpmTasks( "grunt-contrib-uglify" );
-  grunt.loadNpmTasks( "grunt-contrib-qunit" );
-  grunt.loadNpmTasks( "grunt-mocha-test" );
+  grunt.loadNpmTasks( "grunt-shell" );
 
   grunt.initConfig({
     pkg: grunt.file.readJSON( "package.json" ),
@@ -21,7 +20,7 @@ module.exports = function( grunt ) {
 					standard: "Jquery"
 				},
 				files: {
-					src: [ "./rjs.js", "./tests/tests.js" ]
+					src: [ "./rjs.js", "./tests/test.js" ]
 				}
 			},
       test: {
@@ -30,18 +29,11 @@ module.exports = function( grunt ) {
           reportFull: true
 				},
 				files: {
-					src: [ "./rjs.js", "./tests/tests.js" ]
+					src: [ "./rjs.js", "./tests/test.js" ]
 				}
 			}
     },
-    mochaTest: {
-      test: {
-        options: {
-          quiet: false
-        },
-        src: [ "./tests/tests.js" ]
-      }
-    },
+
     uglify: {
       options: {
         banner: "/*! <%= pkg.name %> <%= grunt.template.today(\"yyyy-mm-dd\") %> */\n"
@@ -51,10 +43,16 @@ module.exports = function( grunt ) {
           "./rjs.min.js" : ["./rjs.js"]
         }
       }
+    },
+
+		shell: {
+			"mochaTest": {
+				command: "mocha-phantomjs tests/test.html"
+			}
     }
   });
 
-  grunt.registerTask( "test", [ "jshint", "jscs", "mochaTest", "uglify" ] );
+  grunt.registerTask( "test", [ "jshint", "jscs", "shell:mochaTest", "uglify" ] );
   grunt.registerTask( "default", [ "test", "uglify" ] );
 
 };

@@ -64,4 +64,9 @@ You can run tests like that:
 grunt mochaTest
 ```
 
+Note that to use this library with IE8 you need to load ES5 shim (https://github.com/es-shims/es5-shim)
+and AddEventListener polyfill (https://css-tricks.com/snippets/javascript/addeventlistner-polyfill/).
+See `./tests/test-ie8.html`
+
+
 [![Analytics](https://ga-beacon.appspot.com/UA-1150677-13/dsheiko/micro-requirejs)](http://githalytics.com/dsheiko/micro-requirejs)

@@ -5,7 +5,7 @@
  * @copyright (c) Dmitry Sheiko http://www.dsheiko.com
  * @jscs standard:Jquery
  */
-window.rjs = (function( window ) {
+window.rjs = (function( window, undefined ) {
     "use strict";
       /**
        * Event Mediator
@@ -21,6 +21,13 @@ window.rjs = (function( window ) {
            * @type {Array}
            */
           pendingListeners: [],
+          /**
+           * Reset to intial state
+           */
+          reset: function() {
+            this.eventStack = [];
+            this.pendingListeners = [];
+          },
           /**
            * If any of pending event sets resolved with the currently triggered event
            * then call the corresponsing handler(s) and remove the sets from pending list
@@ -89,15 +96,18 @@ window.rjs = (function( window ) {
        * @class
        */
       Rjs = function(){
-        var eventHub = new EventHub();
-        // Register DOM is ready event
-        if ( window.document.readyState === "complete" || window.document.readyState === "loaded" ) {
-          eventHub.trigger( "DOMContentLoaded" );
-        } else {
-          window.document.addEventListener( "DOMContentLoaded", function(){
-            eventHub.trigger( "DOMContentLoaded" );
-          }, false );
-        }
+        var eventHub = new EventHub(),
+            subscribeDomReady = function(){
+              // Register DOM is ready event
+              if ( window.document.readyState === "complete" || window.document.readyState === "loaded" ) {
+                eventHub.trigger( "DOMContentLoaded" );
+              } else {
+                window.document.addEventListener( "DOMContentLoaded", function(){
+                  eventHub.trigger( "DOMContentLoaded" );
+                }, false );
+              }
+            };
+            subscribeDomReady();
         return {
           /**
            * Load a given script asynchronously and fires event <dependency>-load
@@ -105,27 +115,33 @@ window.rjs = (function( window ) {
            *
            * @param {string} file - dependency script path
            * @param {string} dependency - dependency name
-           * @param {function) done OPTIONAL - A callback function
+           * @param {function) doneArg OPTIONAL - A callback function
            *      that is executed when the request completes.
            * @param {Object} [context]
            */
-          define: function( file, dependency, done, context ) {
-            var script = window.document.createElement( "script" );
+          define: function( file, dependency, doneArg, context ) {
+            var script = window.document.createElement( "script" ),
+                done = context ? doneArg.bind( context ) : doneArg;
 
             if ( typeof dependency !== "string" ) {
                throw new TypeError( "You have specify dependency name" );
-            }
-
-            if ( context ) {
-              done = done.bind( context );
             }
 
             script.type = "text/javascript";
             script.src = file;
             script.async = true;
             window.document.body.appendChild( script );
-            script.onreadystatechange =
-              script.onload = function() {
+            if ( script.onload !== undefined ) {
+              return script.onload = function() {
+                eventHub.trigger( dependency );
+                done && done();
+              };
+            }
+            // IE<9
+            script.onreadystatechange = function() {
+              if ( script.readyState !== "loaded" ) {
+                return;
+              }
               eventHub.trigger( dependency );
               done && done();
             };
@@ -146,10 +162,12 @@ window.rjs = (function( window ) {
           },
           /**
            * Set options
-           * @param {Object} opts
+           * @param {Object} [opts]
            */
           init: function( opts ) {
-            options = opts;
+            options = opts || { debug: false };
+            eventHub.reset();
+            subscribeDomReady();
           }
         };
       };
