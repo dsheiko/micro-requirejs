@@ -70,3 +70,6 @@ See `./tests/test-ie8.html`
 
 
 [![Analytics](https://ga-beacon.appspot.com/UA-1150677-13/dsheiko/micro-requirejs)](http://githalytics.com/dsheiko/micro-requirejs)
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/dsheiko/micro-requirejs/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
