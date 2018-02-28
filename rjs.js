@@ -119,30 +119,43 @@ window.rjs = (function( window, undefined ) {
            *      that is executed when the request completes.
            * @param {Object} [context]
            */
-          define: function( file, dependency, doneArg, context ) {
-            var script = window.document.createElement( "script" ),
-                done = context ? doneArg.bind( context ) : doneArg;
+          define: function (file, dependency, doneArg, context) {
+            //determine requested file type
+            var ext = file.split(".").slice(-1)[0];
+            var element;
+            (ext == "css") ?
+              element = window.document.createElement("link") :
+              element = window.document.createElement("script");
+            var done = context ? doneArg.bind(context) : doneArg;
 
-            if ( typeof dependency !== "string" ) {
-               throw new TypeError( "You have specify dependency name" );
+            if (typeof dependency !== "string") {
+              throw new TypeError("You have specify dependency name");
             }
 
-            script.type = "text/javascript";
-            script.src = file;
-            script.async = true;
-            window.document.body.appendChild( script );
-            if ( script.onload !== undefined ) {
-              return script.onload = function() {
-                eventHub.trigger( dependency );
+            if (ext == "css") {
+              element.type = 'text/css';
+              element.rel = 'stylesheet';
+              element.href = file;
+              element.async = true;
+            } else {
+              element.type = "text/javascript";
+              element.src = file;
+              element.async = true;
+            }
+              
+            window.document.body.appendChild(element);
+            if (element.onload !== undefined) {
+              return element.onload = function () {
+                eventHub.trigger(dependency);
                 done && done();
               };
             }
             // IE<9
-            script.onreadystatechange = function() {
-              if ( script.readyState !== "loaded" ) {
+            element.onreadystatechange = function () {
+              if (element.readyState !== "loaded") {
                 return;
               }
-              eventHub.trigger( dependency );
+              eventHub.trigger(dependency);
               done && done();
             };
           },
