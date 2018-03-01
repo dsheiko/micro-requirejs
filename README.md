@@ -16,6 +16,9 @@ I don't appreciate the idea to interfere with 3-rd party library code, besides I
 So here we go! Micro-RequireJS is just **728B** (gzipped JavaScript) and at the same time
 it allows you to control non-blocking (async) script loading and dependency resolution.
 
+Allowed file extensions:
+- *.js
+- *.css
 
 ### How to use
 

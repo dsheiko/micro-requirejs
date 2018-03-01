@@ -77,5 +77,16 @@ describe( "Rjs", function(){
     }, this );
   });
 
+//  it( "loads CSS", function( done ){
+//    rjs.define( CWD + "/stubs/dep3.css", "dependencyC" );
+//    rjs.require([ "dependencyC" ], function(){
+//      var borderStyle = window
+//          .getComputedStyle( document.getElementById( "mocha" ), null )
+//          .getPropertyValue( "border-bottom-style" );
+//      expect( borderStyle === "dotted" ).to.be.ok;
+//      done();
+//    }, this );
+//  });
+
 
 });

@@ -26,6 +26,8 @@
     "mocha-phantomjs": "^4.0.1"
   },
   "scripts": {
+    "build": "grunt",
+    "lint": "grunt jshint && grunt jscs:test",
     "test": "grunt test"
   },
   "licenses": [

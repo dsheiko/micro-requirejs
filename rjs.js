@@ -7,6 +7,8 @@
  */
 window.rjs = (function( window, undefined ) {
     "use strict";
+
+
       /**
        * Event Mediator
        * @class
@@ -92,6 +94,63 @@ window.rjs = (function( window, undefined ) {
       },
 
       /**
+       * Trim a string
+       *
+       * @param {string} str
+       * @returns {string}
+       */
+      trim = function ( str ) {
+        return str.replace( /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, "" );
+      },
+
+      /**
+       * Build loader element by file name
+       *
+       * @param {string} file
+       * @returns {HTMLElement}
+       */
+      buildLoaderElement = function( file ) {
+        var ext = file.split( "." ).pop();
+        switch ( ext ) {
+          case "css":
+            return cssStrategy( file );
+          case "js":
+            return jsStrategy( file );
+        }
+        throw new Error( "Unknown file extension " + ext );
+      },
+
+      /**
+       * Create loader element according to CSS strategy
+       *
+       * @param {string} file
+       * @returns {HTMLElement}
+       */
+      cssStrategy = function( file ){
+        var el = window.document.createElement( "link" );
+        el.type = "text/css";
+        el.rel = "stylesheet";
+        el.href = file;
+        el.async = true;
+        return el;
+
+      },
+
+      /**
+       * Create loader element according to JavaScript strategy
+       *
+       * @param {string} file
+       * @returns {HTMLElement}
+       */
+      jsStrategy = function( file ){
+        var el = window.document.createElement( "script" );
+        el.type = "text/javascript";
+        el.src = file;
+        el.async = true;
+        return el;
+      },
+
+      /**
        * Manages async loaded dependencies
        * @class
        */
@@ -108,6 +167,7 @@ window.rjs = (function( window, undefined ) {
               }
             };
             subscribeDomReady();
+
         return {
           /**
            * Load a given script asynchronously and fires event <dependency>-load
@@ -119,46 +179,34 @@ window.rjs = (function( window, undefined ) {
            *      that is executed when the request completes.
            * @param {Object} [context]
            */
-          define: function (file, dependency, doneArg, context) {
-            //determine requested file type
-            var ext = file.split(".").slice(-1)[0];
-            var element;
-            (ext == "css") ?
-              element = window.document.createElement("link") :
-              element = window.document.createElement("script");
-            var done = context ? doneArg.bind(context) : doneArg;
+          define: function ( file, dependency, doneArg, context ) {
+            var el = buildLoaderElement( trim( file ) ),
+                done = context ? doneArg.bind( context ) : doneArg;
 
-            if (typeof dependency !== "string") {
-              throw new TypeError("You have specify dependency name");
+            if ( typeof dependency !== "string" ) {
+              throw new TypeError( "You have to specify dependency name" );
             }
 
-            if (ext == "css") {
-              element.type = 'text/css';
-              element.rel = 'stylesheet';
-              element.href = file;
-              element.async = true;
-            } else {
-              element.type = "text/javascript";
-              element.src = file;
-              element.async = true;
-            }
-              
-            window.document.body.appendChild(element);
-            if (element.onload !== undefined) {
-              return element.onload = function () {
-                eventHub.trigger(dependency);
+            window.document.body.appendChild( el );
+
+            if ( el.onload !== undefined ) {
+              el.onload = function() {
+                eventHub.trigger( dependency );
                 done && done();
               };
+              return;
             }
+
             // IE<9
-            element.onreadystatechange = function () {
-              if (element.readyState !== "loaded") {
+            el.onreadystatechange = function() {
+              if ( el.readyState !== "loaded" ) {
                 return;
               }
-              eventHub.trigger(dependency);
+              eventHub.trigger( dependency );
               done && done();
             };
           },
+
           /**
            * Call the function fn when all supplied events fired
            *
