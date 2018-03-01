@@ -2,7 +2,7 @@
   "name": "micro-requirejs",
   "title": "Micro RequireJS",
   "description": "Tiny asynchronous dependency loader, that does not require modification of dependent scripts",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "keywords": [
     "dependency",
     "loader",
