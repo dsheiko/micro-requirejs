@@ -110,7 +110,7 @@ window.rjs = (function( window, undefined ) {
        * @returns {HTMLElement}
        */
       buildLoaderElement = function( file ) {
-        var ext = file.split( "." ).pop();
+        var ext = file.split( "." ).pop().toLowerCase();
         switch ( ext ) {
           case "css":
             return cssStrategy( file );
@@ -187,6 +187,8 @@ window.rjs = (function( window, undefined ) {
               throw new TypeError( "You have to specify dependency name" );
             }
 
+            // make it seekable
+            el.setAttribute( "data-rjs", true );
             window.document.body.appendChild( el );
 
             if ( el.onload !== undefined ) {
@@ -221,6 +223,7 @@ window.rjs = (function( window, undefined ) {
             }
             eventHub.on( events, done );
           },
+
           /**
            * Set options
            * @param {Object} [opts]
@@ -229,7 +232,21 @@ window.rjs = (function( window, undefined ) {
             options = opts || { debug: false };
             eventHub.reset();
             subscribeDomReady();
+          },
+
+          /**
+           * Remove from DOM any assets loaded by RJS
+           */
+          reset: function() {
+            var scripts = document.querySelectorAll( "script[data-rjs]" ),
+                links = document.querySelectorAll( "link[data-rjs]" );
+            [].concat( scripts, links ).forEach(function( el ){
+              if ( el.type ) {
+                el.parentNode.removeChild( el );
+              }
+            });
           }
+
         };
       };
 

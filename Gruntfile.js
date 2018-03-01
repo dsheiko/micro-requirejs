@@ -43,16 +43,11 @@ module.exports = function( grunt ) {
           "./rjs.min.js" : ["./rjs.js"]
         }
       }
-    },
-
-		shell: {
-			"mochaTest": {
-				command: "mocha-phantomjs tests/test.html"
-			}
     }
+
   });
 
-  grunt.registerTask( "test", [ "jshint", "jscs", "shell:mochaTest", "uglify" ] );
-  grunt.registerTask( "default", [ "test", "uglify" ] );
+  grunt.registerTask( "lint", [ "jshint", "jscs", "uglify" ] );
+  grunt.registerTask( "default", [ "uglify" ] );
 
 };

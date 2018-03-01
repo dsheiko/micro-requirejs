@@ -13,6 +13,11 @@
     "name": "Dmitry Sheiko",
     "url": "http://dsheiko.com"
   },
+  "scripts": {
+    "build": "grunt",
+    "lint": "grunt jshint",
+    "test": "karma start karma.conf.js"
+  },
   "main": "./rjs.js",
   "devDependencies": {
     "chai": "^4.1.2",
@@ -21,14 +26,11 @@
     "grunt-contrib-jshint": "^1.1.0",
     "grunt-contrib-uglify": "^3.3.0",
     "grunt-jscodesniffer": "^0.1.10",
-    "grunt-shell": "^2.1.0",
-    "mocha": "^5.0.1",
-    "mocha-phantomjs": "^4.1.0"
-  },
-  "scripts": {
-    "build": "grunt",
-    "lint": "grunt jshint && grunt jscs:test",
-    "test": "grunt test"
+    "jasmine-core": "^3.1.0",
+    "karma": "^2.0.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-cli": "^1.0.1",
+    "karma-jasmine": "^1.1.1"
   },
   "licenses": [
     {

@@ -13,12 +13,9 @@ JavaScript libraries loaded. Usually most of them can load asynchronously
 here would be AMD. That's a sophisticated and time-proved solution.
 However to use it with libraries, you must have them converted to modules.
 I don't appreciate the idea to interfere with 3-rd party library code, besides I would prefer loader library as small as possible.
-So here we go! Micro-RequireJS is just **728B** (gzipped JavaScript) and at the same time
+So here we go! Micro-RequireJS is just **1.5KB** (gzipped JavaScript) and at the same time
 it allows you to control non-blocking (async) script loading and dependency resolution.
 
-Allowed file extensions:
-- *.js
-- *.css
 
 ### How to use
 
@@ -42,12 +39,13 @@ Now we can use the library:
 <script type="text/javascript">
 rjs.define( "./dependencyA.js", "dependencyA" );
 rjs.define( "./dependencyB.js", "dependencyB" );
+rjs.define( "./dependencyC.css", "dependencyB" );
 
 rjs.require([ "dependencyA" ], function(){
    console.log("dependencyA.js is loaded");
 });
-rjs.require([ "DOMContentLoaded", "dependencyA", "dependencyB" ], function(){
-   console.log("dependencyA.js and dependencyB.js and DOM are loaded");
+rjs.require([ "DOMContentLoaded", "dependencyA", "dependencyB", "dependencyC" ], function(){
+   console.log("dependencyA.js, dependencyB.js, dependencyC.js and DOM are loaded");
 });
 </script>
 </body>
@@ -64,7 +62,7 @@ rjs.require([ "jQuery" ], function(){
 
 You can run tests like that:
 ```
-grunt mochaTest
+npm test
 ```
 
 Note that to use this library with IE8 you need to load ES5 shim (https://github.com/es-shims/es5-shim)
