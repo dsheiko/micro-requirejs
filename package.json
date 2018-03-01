@@ -19,7 +19,7 @@
     "es5-shim": "^4.2.0",
     "grunt": "~0.4.1",
     "grunt-contrib-jshint": "~0.4.3",
-    "grunt-contrib-uglify": "^0.8.0",
+    "grunt-contrib-uglify": "^3.3.0",
     "grunt-jscodesniffer": "^0.1.10",
     "grunt-shell": "^1.1.2",
     "mocha": "^2.2.1",
