@@ -2,7 +2,7 @@
   "name": "micro-requirejs",
   "title": "Micro RequireJS",
   "description": "Tiny asynchronous dependency loader, that does not require modification of dependent scripts",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "keywords": [
     "dependency",
     "loader",
@@ -23,14 +23,14 @@
     "chai": "^4.2.0",
     "es5-shim": "^4.5.12",
     "grunt": "^1.0.3",
-    "grunt-contrib-jshint": "^1.1.0",
-    "grunt-contrib-uglify": "^3.4.0",
+    "grunt-contrib-jshint": "^2.0.0",
+    "grunt-contrib-uglify": "^4.0.0",
     "grunt-jscodesniffer": "^0.1.10",
     "jasmine-core": "^3.2.1",
-    "karma": "^2.0.5",
+    "karma": "^3.1.1",
     "karma-chrome-launcher": "^2.2.0",
     "karma-cli": "^1.0.1",
-    "karma-jasmine": "^1.1.2"
+    "karma-jasmine": "^2.0.1"
   },
   "licenses": [
     {
